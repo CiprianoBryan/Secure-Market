@@ -9,7 +9,71 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>core</module>
+        <module>application</module>
     </modules>
     <packaging>pom</packaging>
+
+    <properties>
+        <spring.vesion>5.2.8.RELEASE</spring.vesion>
+        <java.version>8</java.version>
+        <jpa.version>2.3.2.RELEASE</jpa.version>
+        <spring.web.version>5.2.8.RELEASE</spring.web.version>
+        <swagger.version>1.5.13</swagger.version>
+        <lombok.version>1.18.12</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring context -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.vesion}</version>
+            </dependency>
+
+            <!-- JPA -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${jpa.version}</version>
+            </dependency>
+
+            <!-- Spring Web -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.web.version}</version>
+            </dependency>
+
+            <!-- Swagger Annotations -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!-- Lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <release>${java.version}</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
