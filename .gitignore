@@ -1,0 +1,15 @@
+# IntelliJ
+.idea/
+*.ipr
+*.iml
+*.iws
+.idea
+out/
+.DS_Store
+/bootstrap
+/dependencies.xml
+.java-version
+
+# Maven
+log/
+target/
