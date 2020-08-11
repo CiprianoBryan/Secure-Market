@@ -1,4 +1,4 @@
-package com.securemarket.dto.request;
+package com.securemarket.client.dto.request;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

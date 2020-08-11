@@ -1,4 +1,4 @@
-package com.securemarket.dto.response;
+package com.securemarket.client.dto.response;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -14,7 +14,7 @@ public class ClientInquiryResponseDto {
     @ApiModelProperty(notes = "Client´s names", example = "Hard Garcia, Rocha Ez", required = true)
     private String names;
     @ApiModelProperty(notes = "Client´s age", example = "52", required = true)
-    private String age;
+    private int age;
     @ApiModelProperty(notes = "Past date when enter", example = "09/08/2020 15:13:02", required = true)
     private LocalDateTime pastTime;
     @ApiModelProperty(notes = "Next date for enter", example = "11/08/2020 11:22:43", required = true)

@@ -8,18 +8,31 @@
     <artifactId>secure-market</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>core</module>
         <module>application</module>
+        <module>connector</module>
+        <module>web-app</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
-        <spring.vesion>5.2.8.RELEASE</spring.vesion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- versions -->
+        <spring.version>5.0.8.RELEASE</spring.version>
         <java.version>8</java.version>
-        <jpa.version>2.3.2.RELEASE</jpa.version>
-        <spring.web.version>5.2.8.RELEASE</spring.web.version>
+        <jpa.version>2.0.9.RELEASE</jpa.version>
         <swagger.version>1.5.13</swagger.version>
         <lombok.version>1.18.12</lombok.version>
+        <mapstruct.version>1.2.0.Final</mapstruct.version>
+        <javax.version>1.0.2</javax.version>
+        <war.version>3.2.0</war.version>
+        <maven.cargo.version>1.7.12</maven.cargo.version>
+        <liberty.version>3.2</liberty.version>
+        <failsafe.version>2.22.2</failsafe.version>
+        <logback.version>1.2.3</logback.version>
+        <sl4j.version>1.6.1</sl4j.version>
     </properties>
 
     <dependencyManagement>
@@ -28,7 +41,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${spring.vesion}</version>
+                <version>${spring.version}</version>
             </dependency>
 
             <!-- JPA -->
@@ -36,13 +49,6 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${jpa.version}</version>
-            </dependency>
-
-            <!-- Spring Web -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.web.version}</version>
             </dependency>
 
             <!-- Swagger Annotations -->
@@ -58,6 +64,49 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${javax.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <!-- Defined below -->
+                        <artifactId>slf4j-api</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${sl4j.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -70,8 +119,36 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <release>${java.version}</release>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${war.version}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>${maven.cargo.version}</version>
+                <configuration>
+                    <container>
+                        <containerId>tomcat9x</containerId>
+                        <type>embedded</type>
+                    </container>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>${liberty.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${failsafe.version}</version>
             </plugin>
         </plugins>
     </build>
